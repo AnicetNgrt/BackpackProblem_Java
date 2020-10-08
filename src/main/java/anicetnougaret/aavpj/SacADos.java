@@ -67,15 +67,15 @@ abstract class SacADos {
         } else {
             sb.append("Aucune solution encore trouvée ou solution vide.");
         }
-        if(candidates.size() > 0) {
-            sb.append("\nObjets disponibles: \n");
-            for (Item item : candidates) {
-                sb.append(item.toString());
-                sb.append("\n");
-            }
-        } else {
-            sb.append("\nAucun objet disponible.");
-        }
+        // if(candidates.size() > 0) {
+        //     sb.append("\nObjets disponibles: \n");
+        //     for (Item item : candidates) {
+        //         sb.append(item.toString());
+        //         sb.append("\n");
+        //     }
+        // } else {
+        //     sb.append("\nAucun objet disponible.");
+        // }
         return sb.toString();
     }
 }

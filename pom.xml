@@ -37,9 +37,9 @@
           <configuration>
               <mainClass>anicetnougaret.aavpj.App</mainClass>
               <arguments>
-                  <argument>jdt.txt</argument>
-                  <argument>10</argument>
-                  <argument>gloutonne</argument>
+                  <argument>./resources/jdt.txt</argument>
+                  <argument>100</argument>
+                  <argument>pse</argument>
               </arguments>
           </configuration>
         </plugin>

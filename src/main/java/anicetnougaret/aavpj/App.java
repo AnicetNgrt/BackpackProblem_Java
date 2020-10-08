@@ -17,11 +17,19 @@ public class App
 
         if (methodName.compareTo("gloutonne") == 0)
             solveGreedy(path, maxWeight);
+        else if (methodName.compareTo("pse") == 0)
+            solveBNB(path, maxWeight);
     }
 
     public static void solveGreedy(String path, Double maxWeight) {
         SacADos bag = new SacADosGreedy(path, maxWeight);
         System.out.println(bag.toString());
+        bag.solve();
+        System.out.println(bag);
+    }
+
+    public static void solveBNB(String path, Double maxWeight) {
+        SacADos bag = new SacADosBNB(path, maxWeight);
         bag.solve();
         System.out.println(bag);
     }
