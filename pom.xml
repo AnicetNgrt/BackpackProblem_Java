@@ -38,7 +38,7 @@
               <mainClass>anicetnougaret.aavpj.App</mainClass>
               <arguments>
                   <argument>./resources/jdt.txt</argument>
-                  <argument>100</argument>
+                  <argument>20</argument>
                   <argument>pse</argument>
               </arguments>
           </configuration>

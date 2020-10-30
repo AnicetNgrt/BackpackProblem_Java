@@ -1,18 +1,18 @@
 package anicetnougaret.aavpj;
 
 public class Item implements Comparable<Item> {
-    private final String name;
-    private final double weight;
-    private final double value;
+    private final String nom;
+    private final int poids;
+    private final int valeur;
 
-    public Item(final String name, final double weight, final double value) {
-        this.name = name;
-        this.weight = weight;
-        this.value = value;
+    public Item(final String nom, final int poids, final int valeur) {
+        this.nom = nom;
+        this.poids = poids;
+        this.valeur = valeur;
     }
 
-    public double vpRatio() {
-        return value / weight;
+    public double ratioValeurPoids() {
+        return (double)valeur / (double)poids;
     }
 
     @Override
@@ -20,34 +20,34 @@ public class Item implements Comparable<Item> {
         if (item == null)
             return this == null ? 0 : 1;
 
-        final double ratioA = this.vpRatio();
-        final double ratioB = item.vpRatio();
+        final double ratioA = this.ratioValeurPoids();
+        final double ratioB = item.ratioValeurPoids();
         return ratioA > ratioB ? 1 : (ratioA < ratioB ? -1 : 0);
     }
 
-    public double getWeight() {
-        return weight;
+    public int getPoids() {
+        return poids;
     }
 
-    public double getValue() {
-        return value;
+    public int getValeur() {
+        return valeur;
     }
 
     public String toString() {
         final StringBuilder sb = new StringBuilder("");
-        sb.append(String.format("-%-18s", "\""+name+"\""));
+        sb.append(String.format("-%-18s", "\""+nom+"\""));
         sb.append(" value~=");
-        sb.append(String.format("%-11f", value));
+        sb.append(String.format("%-6d", valeur));
         sb.append(" weight~=");
-        sb.append(String.format("%-11f", weight));
+        sb.append(String.format("%-6d", poids));
         sb.append(" ratio~=");
-        sb.append(String.format("%-11f", vpRatio()));
+        sb.append(String.format("%-11f", ratioValeurPoids()));
         return sb.toString();
     }
 
-    public static Item parseItem(String line) {
-        String[] parts = line.split(" ; ");
-        return new Item(parts[0], Double.parseDouble(parts[1]), Double.parseDouble(parts[2]));
+    public static Item décoderItem(String chaîne) {
+        String[] parties = chaîne.split(" ; ");
+        return new Item(parties[0], Integer.parseInt(parties[1]), Integer.parseInt(parties[2]));
     }
 
 }

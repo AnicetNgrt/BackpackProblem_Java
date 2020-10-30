@@ -7,31 +7,31 @@ import java.util.ArrayList;
 
 abstract class SacADos {
 
-    protected ArrayList<Item> candidates;
-    protected ArrayList<Item> content;
-    protected double maxWeight;
+    protected ArrayList<Item> itemsDisponibles;
+    protected ArrayList<Item> itemsSélectionnés;
+    protected int poidsMax;
 
     public SacADos() {
-        candidates = new ArrayList<Item>(0);
-        content = new ArrayList<Item>(0);
+        itemsDisponibles = new ArrayList<Item>(0);
+        itemsSélectionnés = new ArrayList<Item>(0);
+        poidsMax = 0;
     }
 
-    public SacADos(String path, double maxWeight) {
-        candidates = new ArrayList<Item>(0);
-        content = new ArrayList<Item>(0);
-        this.maxWeight = maxWeight;
-        parseItems(path);
+    public SacADos(String chemin, int poidsMaximal) {
+        this();
+        this.poidsMax = poidsMaximal;
+        décoderItemsDisponibles(chemin);
     }
 
-    public abstract void solve();
+    public abstract void résoudre();
 
-    private void parseItems(String path) {
+    private void décoderItemsDisponibles(String chemin) {
         BufferedReader reader;
         try {
-            reader = new BufferedReader(new FileReader(path));
+            reader = new BufferedReader(new FileReader(chemin));
             String line = reader.readLine();
             while (line != null) {
-                addCandidate(Item.parseItem(line));
+                déclarerItem(Item.décoderItem(line));
                 line = reader.readLine();
             }
             reader.close();
@@ -40,42 +40,37 @@ abstract class SacADos {
         }
     }
 
-    public void addCandidate(Item candidate) {
-        candidates.add(candidate);
+    public void déclarerItem(Item item) {
+        itemsDisponibles.add(item);
+    }
+
+    public void sélectionnerItem(Item item) {
+        itemsSélectionnés.add(item);
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder("");
-        if (content.size() > 0){
-            sb.append("Solution trouvée: \n");
-            double totalWeight = 0;
-            double totalValue = 0;
-            for (Item item : content) {
+        if (itemsSélectionnés.size() > 0){
+            sb.append("Solution trouvée : \n");
+            double poidsTotal = 0;
+            double valeurTotale = 0;
+            for (Item item : itemsSélectionnés) {
                 sb.append(item.toString());
                 sb.append("\n");
-                totalWeight += item.getWeight();
-                totalValue += item.getValue();
+                poidsTotal += item.getPoids();
+                valeurTotale += item.getValeur();
             }
-            sb.append("Total weight: ");
-            sb.append(totalWeight);
+            sb.append("Poids total : ");
+            sb.append(poidsTotal);
             sb.append("/");
-            sb.append(maxWeight);
+            sb.append(poidsMax);
             sb.append("\n");
-            sb.append("Total value: ");
-            sb.append(totalValue);
+            sb.append("Valeur totale : ");
+            sb.append(valeurTotale);
             sb.append("\n");
         } else {
             sb.append("Aucune solution encore trouvée ou solution vide.");
         }
-        // if(candidates.size() > 0) {
-        //     sb.append("\nObjets disponibles: \n");
-        //     for (Item item : candidates) {
-        //         sb.append(item.toString());
-        //         sb.append("\n");
-        //     }
-        // } else {
-        //     sb.append("\nAucun objet disponible.");
-        // }
         return sb.toString();
     }
 }

@@ -15,20 +15,16 @@ f.close()
 f = open(os.path.join(dir_path,'jdt.txt'), "+w")
 
 itemCount = int(input("item count ? [>200 => JVM kapput]: "))
-useNormal = input("Use uniform law [default] or normal law [N] ?: ").lower() == "n"
 
-if(useNormal):
-    pass
-else:
-    maxCost = float(input("max cost ?: "))
-    minCost = float(input("min cost ?: "))
-    maxWeight = float(input("max weight ?: "))
-    minWeight = float(input("min weight ?: "))
-    for i in range(0, itemCount):
-        string = names[random.randint(0, len(names)-1)]
-        string += " ; "+str(random.uniform(minWeight, maxWeight))
-        string += " ; "+str(random.uniform(minCost, maxCost))
-        string += "\n"
-        f.write(string)
+maxCost = int(input("max cost ?: "))
+minCost = int(input("min cost ?: "))
+maxWeight = int(input("max weight ?: "))
+minWeight = int(input("min weight ?: "))
+for i in range(0, itemCount):
+    string = names[random.randint(0, len(names)-1)]
+    string += " ; "+str(int(random.uniform(minWeight, maxWeight)))
+    string += " ; "+str(int(random.uniform(minCost, maxCost)))
+    string += "\n"
+    f.write(string)
 
 f.close()
