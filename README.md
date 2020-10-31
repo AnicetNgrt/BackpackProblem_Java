@@ -1,2 +1,2 @@
-# BackpackProblem_Java
-Java project for the uni. Solving the backpack problem with 3 techniques.
+# KnapsackProblem_Java
+Java project for the uni. Solving the 0/1 knapsack problem with 3 techniques.
